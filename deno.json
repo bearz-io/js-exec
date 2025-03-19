@@ -1,0 +1,118 @@
+{
+    "fmt": {
+        "exclude": [
+            "**/*.md"
+        ],
+        "indentWidth": 4,
+        "lineWidth": 100,
+        "useTabs": false
+    },
+    "publish": {
+        "exclude": [
+            "eng",
+            ".vscode",
+            ".github",
+            "**/*.test.ts",
+            "node_modules/**",
+            ".artifacts",
+            "vitest.config.ts",
+            ".prototools"
+        ]
+    },
+    "tasks": {
+        "test": {
+            "command": "deno test -A",
+            "description": "Run tests"
+        },
+        "tw": {
+            "command": "deno test -A --watch",
+            "description": "Run tests in watch mode"
+        },
+        "bun:install": {
+            "command": "cd ./npm && bun install",
+            "description": "Install npm dependencies"
+        },
+        "test:npm": {
+            "command": "cd ./npm && node --test",
+            "description": "Run tests in npm"
+        },
+        "test:bun": {
+            "command": "deno run -A ./.eng/bun-test.ts",
+            "description": "Run tests in bun"
+        },
+        "test:all": {
+            "command": "deno test -A && deno run -A ./.eng/dnt.ts && deno run -A ./.eng/bun-test.ts",
+            "description": "Run tests in CI"
+        },
+        "cov:lcov": {
+            "command": "deno test -A --coverage=./.artifacts/coverage/raw && deno coverage ./.artifacts/coverage/raw --lcov > ./.artifacts/coverage/lcov.info",
+            "description": "Run test coverage"
+        },
+        "cov:report": {
+            "command": "deno coverage ./.artifacts/coverage/raw --html && cp -r ./.artifacts/coverage/raw/html ./.artifacts/coverage/html",
+            "description": "Report test coverage"
+        },
+        "cov": {
+            "dependencies": [
+                "cov:lcov"
+            ],
+            "description": "Run and report test coverage",
+            "command": "echo 'done'"
+        },
+        "fmt": {
+            "command": "deno fmt && deno lint",
+            "description": "Prepare for publish"
+        },
+        "cp:md": {
+            "command": "cp ./README.md ./jsr && cp ./LICENSE.md ./jsr",
+            "description": "Copy README.md and LICENSE.md to jsr folder"
+        },
+        "publish:prep": {
+            "dependencies": [
+                "fmt",
+                "test:all",
+                "npm:audit",
+                "cp:md"
+            ],
+            "command": "deno publish --dry-run --allow-dirty && cd ./npm && npm publish --dry-run",
+            "description": "Prepare for publish"
+        },
+        "jsr:publish:test": {
+            "command": "deno publish --dry-run --allow-dirty",
+            "description": "Test jsr publish"
+        },
+        "npm:publish:test": {
+            "command": "cd ./npm && npm publish --dry-run",
+            "description": "Test npm publish"
+        },
+        "version": {
+            "command": "deno run -A ./.eng/version.ts",
+            "description": "Set version"
+        },
+        "dnt": {
+            "command": "deno run -A ./.eng/dnt.ts",
+            "description": "transoform module into node module"
+        },
+        "npm:audit": {
+            "command": "cd ./npm && npm audit",
+            "description": "Run npm audit"
+        }
+    },
+    "exclude": [
+        "npm",
+        ".vscode",
+        ".github"
+    ],
+    "imports": {
+        "@bearz/assert": "jsr:@bearz/assert@^0.1.0",
+        "@bearz/chars": "jsr:@bearz/chars@^0.1.0",
+        "@bearz/env": "jsr:@bearz/env@^0.1.3",
+        "@bearz/fs": "jsr:@bearz/fs@^0.1.0",
+        "@bearz/path": "jsr:@bearz/path@^0.0.0",
+        "@bearz/strings": "jsr:@bearz/strings@^0.1.3",
+        "@bearz/testing": "jsr:@bearz/testing@^0.0.0"
+    },
+    "workspace": [
+        "jsr"
+    ]
+}

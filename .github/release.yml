@@ -1,0 +1,22 @@
+changelog:
+  exclude:
+    labels:
+      - work
+      - chore
+    authors:
+      - octocat
+      - dependabot
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - breaking-change
+        - breaking
+    - title: Exciting New Features 🎉
+      labels:
+        - enhancement
+        - feature
+        - feat
+    - title: Bug Fixes 🐛
+      labels:
+        - bug
+        - fix

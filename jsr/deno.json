@@ -1,0 +1,26 @@
+{
+    "name": "@bearz/exec",
+    "description": "The exec module makes it easy to spawn child_processes across different runtimes and different operating systems.",
+    "keywords": [
+        "exec",
+        "command",
+        "shell",
+        "process",
+        "child-process",
+        "spawn",
+        "which",
+        "split-arguments",
+        "splat"
+    ],
+    "version": "0.1.0",
+    "exports": {
+        ".": "./mod.ts",
+        "./command": "./command.ts",
+        "./errors": "./errors.ts",
+        "./path-finder": "./path_finder.ts",
+        "./set-logger": "./set_logger.ts",
+        "./splat": "./splat.ts",
+        "./split-arguments": "./split_arguments.ts",
+        "./which": "./which.ts"
+    }
+}

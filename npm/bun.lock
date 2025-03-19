@@ -1,0 +1,44 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "@bearz/exec",
+      "dependencies": {
+        "@bearz/chars": "^0.1.0",
+        "@bearz/env": "^0.1.3",
+        "@bearz/fs": "^0.1.0",
+        "@bearz/path": "^0.0.0",
+        "@bearz/strings": "^0.1.3",
+      },
+      "devDependencies": {
+        "@bearz/assert": "^0.1.0",
+        "@bearz/testing": "^0.0.0",
+        "@types/node": "^22.13.4",
+        "picocolors": "^1.0.0",
+      },
+    },
+  },
+  "packages": {
+    "@bearz/assert": ["@bearz/assert@0.1.0", "", {}, "sha512-tlQIt+AEbJjR5zICn30LgaYqAaNn3CtVwC3feqlL5zQf0a3CrjBietx5Ie2gp1EkHydB/sUW6M2LjLEyUP1uNQ=="],
+
+    "@bearz/chars": ["@bearz/chars@0.1.0", "", {}, "sha512-e3k53z3NH5swlEMOFcVzIw1TaH19dBBYvVyEUC1Jk0TVy2F5qOgJkTf6xKSkaX1yu/QlwljkMN9uYpkG0M0H7Q=="],
+
+    "@bearz/env": ["@bearz/env@0.1.3", "", { "dependencies": { "@bearz/chars": "^0.1.0", "@bearz/strings": "^0.1.3" } }, "sha512-U2X1RVK9SZxNTYSJ1isRU11gg4DwZH5AuWG4tNI2Kt13JYe/j04pPYPbBO6ciVQMlAAOfPn6fPd6bha8/51niQ=="],
+
+    "@bearz/fs": ["@bearz/fs@0.1.0", "", { "dependencies": { "@bearz/path": "^0.0.0" } }, "sha512-Y+fEND3OGVKASLDda0xl/JftrHM5DaB9jrQpRakdZmxLQxTm+z2QIvjNePW/SfyFOJMGvmnwaehqyHJpQU/CjA=="],
+
+    "@bearz/path": ["@bearz/path@0.0.0", "", { "dependencies": { "@bearz/chars": "^0.1.0" } }, "sha512-dDxIet/12AqMEMqNUkJKoTv/0VTsMiM1oG7uFoO+dtoFV8DZzMDGzvTCpKKcV84IB1NmHmMsOAuCCt9eYLufLw=="],
+
+    "@bearz/slices": ["@bearz/slices@0.1.1", "", { "dependencies": { "@bearz/chars": "^0.1.0" } }, "sha512-XHOKHea6UtWg9goUceyM4ABAaez28OWrmb0bLj2ZtNuJk5rYu2AoX/LTY1eFVSKZbeZxUvuQHR/qdk6FGmdVQQ=="],
+
+    "@bearz/strings": ["@bearz/strings@0.1.3", "", { "dependencies": { "@bearz/chars": "^0.1.0", "@bearz/slices": "^0.1.1" } }, "sha512-0oZO+2SeC4QTVV2icxweGfxjBADhB9NqdUI0UJUabi29YaN3fU2xOslh3O9g08CZI5h3VQXqYRDcqjz/q6BnWw=="],
+
+    "@bearz/testing": ["@bearz/testing@0.0.0", "", {}, "sha512-tKBN8kBR2nP8mpZLJFrqG0Esej23eXLXZNrxj5cAtwT6vbGMKPIhePqVQH8zgcJOlhivKYZNmHjk36px4MaFAQ=="],
+
+    "@types/node": ["@types/node@22.13.10", "", { "dependencies": { "undici-types": "~6.20.0" } }, "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw=="],
+
+    "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
+
+    "undici-types": ["undici-types@6.20.0", "", {}, "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="],
+  }
+}

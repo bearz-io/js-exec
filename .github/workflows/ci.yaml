@@ -1,0 +1,85 @@
+name: "ci"
+
+on:
+  push:
+    tags-ignore: "**"
+    branches: '**'
+    paths: 
+      - '**'
+      - '.github/workflows/ci.yaml'
+  
+  schedule:
+    - cron: '12 11 * * *'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Run Deno Tests
+        run: deno task test
+
+      - name: Generate Code Coverage
+        if: startsWith(github.ref, 'refs/heads/main') && matrix.os == 'ubuntu-latest'
+        run: deno task cov
+        
+      - name: Upload Code Coverage
+        uses: codecov/codecov-action@v5
+        if: startsWith(github.ref, 'refs/heads/main') && matrix.os == 'ubuntu-latest'
+        with:
+          fail_ci_if_error: true # optional (default = false)
+          files: .artifacts/coverage/cobertura-coverage.xml # optional
+          token: ${{ secrets.CODE_COV_TOKEN }}
+          verbose: true # optional (default = false)
+
+      - name: Zip Code Coverage Report
+        if: startsWith(github.ref, 'refs/heads/main') && matrix.os == 'ubuntu-latest'
+        run: zip -r ./.artifacts/coverage-report.zip .artifacts/coverage
+
+      - name: Publish Code Coverage Report
+        uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/heads/main') && matrix.os == 'ubuntu-latest'
+        with:
+          name: coverage-report
+          path: ./.artifacts/coverage-report.zip
+
+      - name: Run Bun Install
+        run: deno task bun:install
+
+      - name: Run Node Tests
+        run: deno task test:npm
+
+      - name: Run Bun Tests
+        run: deno task test:bun
+
+      - name: "Npm Audit"
+        run: deno task npm:audit
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Jsr Publish Dry Run
+        run: deno task jsr:publish:test
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Npm Publish Dry Run
+        run: deno task npm:publish:test
+        if: matrix.os == 'ubuntu-latest'

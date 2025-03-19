@@ -1,0 +1,105 @@
+{
+  "name": "@bearz/exec",
+  "version": "0.1.0",
+  "description": "The exec module makes it easy to spawn child_processes across different runtimes and different operating systems.",
+  "keywords": [
+    "exec",
+    "command",
+    "shell",
+    "process",
+    "child-process",
+    "spawn",
+    "which",
+    "split-arguments",
+    "splat"
+  ],
+  "homepage": "bearz.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bearz-io/js-exec.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bearz-io/js-exec/discussions"
+  },
+  "module": "./esm/mod.js",
+  "types": "./types/mod.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/mod.d.ts",
+        "default": "./esm/mod.js"
+      }
+    },
+    "./command": {
+      "import": {
+        "types": "./types/command.d.ts",
+        "default": "./esm/command.js"
+      }
+    },
+    "./errors": {
+      "import": {
+        "types": "./types/errors.d.ts",
+        "default": "./esm/errors.js"
+      }
+    },
+    "./path-finder": {
+      "import": {
+        "types": "./types/path_finder.d.ts",
+        "default": "./esm/path_finder.js"
+      }
+    },
+    "./set-logger": {
+      "import": {
+        "types": "./types/set_logger.d.ts",
+        "default": "./esm/set_logger.js"
+      }
+    },
+    "./splat": {
+      "import": {
+        "types": "./types/splat.d.ts",
+        "default": "./esm/splat.js"
+      }
+    },
+    "./split-arguments": {
+      "import": {
+        "types": "./types/split_arguments.d.ts",
+        "default": "./esm/split_arguments.js"
+      }
+    },
+    "./which": {
+      "import": {
+        "types": "./types/which.d.ts",
+        "default": "./esm/which.js"
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:bun": "bun test"
+  },
+  "authors": [
+    {
+      "name": "jolt9dev",
+      "email": "dev@jolt9.com"
+    }
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "dependencies": {
+    "@bearz/chars": "^0.1.0",
+    "@bearz/strings": "^0.1.3",
+    "@bearz/env": "^0.1.3",
+    "@bearz/fs": "^0.1.0",
+    "@bearz/path": "^0.0.0"
+  },
+  "devDependencies": {
+    "picocolors": "^1.0.0",
+    "@types/node": "^22.13.4",
+    "@bearz/testing": "^0.0.0",
+    "@bearz/assert": "^0.1.0"
+  },
+  "_generatedBy": "dnt@dev"
+}

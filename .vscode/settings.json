@@ -1,0 +1,7 @@
+{
+    "deno.enable": true,
+    "deno.disablePaths": ["./npm"],
+    "catppuccin-icons.associations.files": {
+        "*_test.ts": "typescript-test"
+    }
+}
