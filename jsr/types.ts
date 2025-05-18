@@ -260,7 +260,7 @@ export interface ChildProcess extends AsyncDisposable {
     [Symbol.asyncDispose](): Promise<void>;
 }
 
-export interface CommandOptions {
+export interface CommandOptions extends Record<string, unknown> {
     /**
      * The working directory of the process.
      *

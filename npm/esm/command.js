@@ -10,7 +10,7 @@
  */
 // @ts-nocheck TS2455
 import { CommandError, NotFoundOnPathError } from "./errors.js";
-import { globals, loadChildProcess } from "./globals.js";
+import { globals, loadChildProcess, WIN } from "./globals.js";
 import { pathFinder } from "./path_finder.js";
 import { getLogger } from "./set_logger.js";
 import { splat } from "./splat.js";
@@ -1058,11 +1058,23 @@ if (globals.Deno) {
         o.stdin ??= "inherit";
         o.stdout ??= "piped";
         o.stderr ??= "piped";
+        // handle shell options for windows and node's limitation for spawn
+        // where it will no longer execute the command if shell is not set
+        // for cmd and bat files.
+        let shell = o.shell ?? false;
+        const detached = o.detached ?? undefined;
+        const windowsHide = o.windowsHide ?? undefined;
+        if (WIN && exe.endsWith(".bat") || exe.endsWith(".cmd")) {
+            shell = true;
+        }
         const child = spawn(exe, args, {
             cwd: o.cwd,
             env: o.env,
             gid: o.gid,
             uid: o.uid,
+            shell: shell,
+            detached: detached,
+            windowsHide: windowsHide,
             stdio: [mapPipe(o.stdin), mapPipe(o.stdout), mapPipe(o.stderr)],
             windowsVerbatimArguments: o.windowsRawArguments,
             // deno-lint-ignore no-explicit-any
@@ -1142,11 +1154,23 @@ if (globals.Deno) {
         if (this.options?.log) {
             this.options.log(exe, args);
         }
+        // handle shell options for windows and node's limitation for spawn
+        // where it will no longer execute the command if shell is not set
+        // for cmd and bat files.
+        let shell = o.shell ?? false;
+        const detached = o.detached ?? undefined;
+        const windowsHide = o.windowsHide ?? undefined;
+        if (WIN && exe.endsWith(".bat") || exe.endsWith(".cmd")) {
+            shell = true;
+        }
         const child = spawnSync(exe, args, {
             cwd: o.cwd,
             env: o.env,
             gid: o.gid,
             uid: o.uid,
+            shell: shell,
+            detached: detached,
+            windowsHide: windowsHide,
             stdio: [mapPipe(o.stdin), mapPipe(o.stdout), mapPipe(o.stderr)],
             windowsVerbatimArguments: o.windowsRawArguments,
         });
@@ -1178,11 +1202,23 @@ if (globals.Deno) {
         if (this.options?.log) {
             this.options.log(exe, args);
         }
+        // handle shell options for windows and node's limitation for spawn
+        // where it will no longer execute the command if shell is not set
+        // for cmd and bat files.
+        let shell = o.shell ?? false;
+        const detached = o.detached ?? undefined;
+        const windowsHide = o.windowsHide ?? undefined;
+        if (WIN && exe.endsWith(".bat") || exe.endsWith(".cmd")) {
+            shell = true;
+        }
         const child = spawn(exe, args, {
             cwd: o.cwd,
             env: o.env,
             gid: o.gid,
             uid: o.uid,
+            shell: shell,
+            detached: detached,
+            windowsHide: windowsHide,
             stdio: [stdin, stdout, stderr],
             windowsVerbatimArguments: o.windowsRawArguments,
         });
@@ -1212,11 +1248,23 @@ if (globals.Deno) {
             if (this.options?.log) {
                 this.options.log(exe, args);
             }
+            // handle shell options for windows and node's limitation for spawn
+            // where it will no longer execute the command if shell is not set
+            // for cmd and bat files.
+            let shell = o.shell ?? false;
+            const detached = o.detached ?? undefined;
+            const windowsHide = o.windowsHide ?? undefined;
+            if (WIN && exe.endsWith(".bat") || exe.endsWith(".cmd")) {
+                shell = true;
+            }
             const child = spawn(exe, args, {
                 cwd: o.cwd,
                 env: o.env,
                 gid: o.gid,
                 uid: o.uid,
+                shell: shell,
+                detached: detached,
+                windowsHide: windowsHide,
                 stdio: [mapPipe(o.stdin), mapPipe(o.stdout), mapPipe(o.stderr)],
                 windowsVerbatimArguments: o.windowsRawArguments,
                 // deno-lint-ignore no-explicit-any
@@ -1305,11 +1353,23 @@ if (globals.Deno) {
             if (this.options?.log) {
                 this.options.log(exe, args);
             }
+            // handle shell options for windows and node's limitation for spawn
+            // where it will no longer execute the command if shell is not set
+            // for cmd and bat files.
+            let shell = o.shell ?? false;
+            const detached = o.detached ?? undefined;
+            const windowsHide = o.windowsHide ?? undefined;
+            if (WIN && this.file.endsWith(".bat") || this.file.endsWith(".cmd")) {
+                shell = true;
+            }
             const child = spawnSync(this.file, args, {
                 cwd: o.cwd,
                 env: o.env,
                 gid: o.gid,
                 uid: o.uid,
+                shell: shell,
+                detached: detached,
+                windowsHide: windowsHide,
                 stdio: [mapPipe(o.stdin), mapPipe(o.stdout), mapPipe(o.stderr)],
                 windowsVerbatimArguments: o.windowsRawArguments,
             });
@@ -1355,11 +1415,23 @@ if (globals.Deno) {
         if (this.options?.log) {
             this.options.log(exe, args);
         }
+        // handle shell options for windows and node's limitation for spawn
+        // where it will no longer execute the command if shell is not set
+        // for cmd and bat files.
+        let shell = o.shell ?? false;
+        const detached = o.detached ?? undefined;
+        const windowsHide = o.windowsHide ?? undefined;
+        if (WIN && this.file.endsWith(".bat") || this.file.endsWith(".cmd")) {
+            shell = true;
+        }
         const child = spawn(exe, args, {
             cwd: o.cwd,
             env: o.env,
             gid: o.gid,
             uid: o.uid,
+            shell: shell,
+            detached: detached,
+            windowsHide: windowsHide,
             stdio: [stdin, stdout, stderr],
             windowsVerbatimArguments: o.windowsRawArguments,
         });
